@@ -1,0 +1,16 @@
+.my-loader {
+  border: 1vw solid #DDDDDD;
+  border-top: 1vw solid #988F80;
+  border-radius: 50%;
+  height: 10vw;
+  width: 10vw;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: calc(50vh - 5vw);
+  left: calc(50vw - 5vw); }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }

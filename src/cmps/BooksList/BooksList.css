@@ -1,0 +1,19 @@
+.book-list {
+  padding: 1em 0; }
+  .book-list .add-new {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    border-radius: 50%;
+    border: 5px solid #250848;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    color: #250848;
+    opacity: .7;
+    cursor: pointer; }
+  .book-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; }

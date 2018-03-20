@@ -1,0 +1,18 @@
+@import '../_vars.scss';
+
+body {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    overflow-y: scroll;
+    height: 100vh;
+    width: 100vw;
+    background-color: $bg-color;
+    border: 5px solid $alt-color;
+    color: $color;
+    
+}
+
+@media screen and (max-width: 660px ) {
+    
+}

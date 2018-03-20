@@ -1,0 +1,77 @@
+@import '../../_vars.scss';
+
+.Header {
+    padding: 0 2%;
+    background-image: url('../../assets/library.png');
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    .my-logo {
+        margin: 0 auto;
+        width: 20%;
+        max-width: 100px;
+        img {
+            width: 100%;
+        }
+    }
+    .my-search {
+        margin: 0 auto;
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        form {
+            width: 100%;
+            display: flex;
+            border: none; 
+            border-bottom: 4px solid $light-color;
+            .search-bar {
+                background-color: transparent;
+                color: $light-color;
+                width: 100%;
+                // border: 2px solid $light-color;
+                border: none;
+                border-right: none;
+                outline: none;
+                padding: 6px;
+                font-size: 1.5em;
+                &::placeholder {
+                    color: $light-color;
+                    opacity: .8;
+                }
+            }
+            i {
+                padding: 6px;                
+                font-size: 1.5em;
+                color: $light-color;    
+                // border: 2px solid $light-color;
+                border-left: none; 
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 660px ) {
+    .Header {
+        position: fixed;
+        width: 100vw;
+        padding: 0;
+        height: 10vh;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0;
+        .my-logo {
+            display: none;
+        }
+        .my-search {
+            width: 100%;
+            margin: 0 auto;
+            form {
+                width: 100%;
+                margin: 0;          
+            }
+        }
+    }
+
+}

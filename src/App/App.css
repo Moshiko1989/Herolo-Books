@@ -1,0 +1,10 @@
+body {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 100vw;
+  background-color: #988F80;
+  border: 5px solid #E2DFB4;
+  color: #250848; }

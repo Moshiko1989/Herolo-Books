@@ -1,0 +1,25 @@
+@import '../../_vars.scss';
+
+.my-form {
+    width: 80%;
+    margin: 0 auto;
+    div {
+        margin: 0 auto;
+        h1 {
+            color: $color
+        }
+        .my-input {
+            margin: 1em 0;
+            width: 100%;
+            background-color: $bg-color;
+            color: $light-color;
+            border: none;
+            outline: none;
+            padding: 6px;
+            font-size: 1.5em;
+        }
+        div.msg {
+            color: red;
+        }
+    }
+}

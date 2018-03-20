@@ -1,0 +1,26 @@
+@import '../../_vars.scss';
+
+.book-list {
+    padding: 1em 0;
+    .add-new {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        border-radius: 50%;
+        border: 5px solid $color;
+        padding: 0;
+        width: 35px;
+        height: 35px;
+        background-color: transparent;
+        color: $color;
+        opacity: .7;
+        cursor: pointer;
+    }
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+}
+
+

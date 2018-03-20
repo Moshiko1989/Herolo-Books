@@ -1,0 +1,19 @@
+@import '../../_vars.scss';
+
+.my-loader {
+    border: $loader-size * .1 solid $light-color; 
+    border-top: $loader-size * .1 solid $bg-color;
+    border-radius: 50%;
+    height: $loader-size;
+    width: $loader-size;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: $loader-top;
+    left: $loader-left;
+ 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

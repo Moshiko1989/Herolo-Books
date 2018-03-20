@@ -1,0 +1,59 @@
+.Header {
+  padding: 0 2%;
+  background-image: url("../../assets/library.png");
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column; }
+  .Header .my-logo {
+    margin: 0 auto;
+    width: 20%;
+    max-width: 100px; }
+    .Header .my-logo img {
+      width: 100%; }
+  .Header .my-search {
+    margin: 0 auto;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; }
+    .Header .my-search form {
+      width: 100%;
+      display: flex;
+      border: none;
+      border-bottom: 4px solid #DDDDDD; }
+      .Header .my-search form .search-bar {
+        background-color: transparent;
+        color: #DDDDDD;
+        width: 100%;
+        border: none;
+        border-right: none;
+        outline: none;
+        padding: 6px;
+        font-size: 1.5em; }
+        .Header .my-search form .search-bar::placeholder {
+          color: #DDDDDD;
+          opacity: .8; }
+      .Header .my-search form i {
+        padding: 6px;
+        font-size: 1.5em;
+        color: #DDDDDD;
+        border-left: none; }
+
+@media screen and (max-width: 660px) {
+  .Header {
+    position: fixed;
+    width: 100vw;
+    padding: 0;
+    height: 10vh;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0; }
+    .Header .my-logo {
+      display: none; }
+    .Header .my-search {
+      width: 100%;
+      margin: 0 auto; }
+      .Header .my-search form {
+        width: 100%;
+        margin: 0; } }

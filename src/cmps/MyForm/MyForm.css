@@ -1,0 +1,18 @@
+.my-form {
+  width: 80%;
+  margin: 0 auto; }
+  .my-form div {
+    margin: 0 auto; }
+    .my-form div h1 {
+      color: #250848; }
+    .my-form div .my-input {
+      margin: 1em 0;
+      width: 100%;
+      background-color: #988F80;
+      color: #DDDDDD;
+      border: none;
+      outline: none;
+      padding: 6px;
+      font-size: 1.5em; }
+    .my-form div div.msg {
+      color: red; }
