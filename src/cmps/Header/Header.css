@@ -43,7 +43,8 @@
 @media screen and (max-width: 660px) {
   .Header {
     position: fixed;
-    width: 100vw;
+    top: 5px;
+    width: calc(100vw - 10px);
     padding: 0;
     height: 10vh;
     flex-direction: row;

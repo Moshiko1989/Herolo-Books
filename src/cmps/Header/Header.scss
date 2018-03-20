@@ -45,7 +45,6 @@
                 padding: 6px;                
                 font-size: 1.5em;
                 color: $light-color;    
-                // border: 2px solid $light-color;
                 border-left: none; 
             }
         }
@@ -55,7 +54,8 @@
 @media screen and (max-width: 660px ) {
     .Header {
         position: fixed;
-        width: 100vw;
+        top: 5px;
+        width: calc(100vw - 10px);
         padding: 0;
         height: 10vh;
         flex-direction: row;
