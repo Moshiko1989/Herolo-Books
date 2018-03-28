@@ -34,11 +34,17 @@
         .Header .my-search form .search-bar::placeholder {
           color: #DDDDDD;
           opacity: .8; }
-      .Header .my-search form i {
-        padding: 6px;
-        font-size: 1.5em;
-        color: #DDDDDD;
-        border-left: none; }
+      .Header .my-search form button {
+        background: transparent;
+        border: none;
+        cursor: pointer; }
+        .Header .my-search form button:focus {
+          outline: none; }
+        .Header .my-search form button i {
+          padding: 6px;
+          font-size: 1.5em;
+          color: #DDDDDD;
+          border-left: none; }
 
 @media screen and (max-width: 660px) {
   .Header {

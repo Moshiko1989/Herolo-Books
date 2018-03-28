@@ -1,12 +1,9 @@
 // Extentions
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-// Components 
-import { MyForm } from '../MyForm/MyForm';
+import { observer } from 'mobx-react';
 // Styles 
-import './Book.css'
+import './Book.css';
 
-@inject('BookStore', 'ModalStore')
 @observer
 export class Book extends Component {
     state = {
@@ -17,17 +14,41 @@ export class Book extends Component {
         this.renderBook(this.props.book)
     }
 
-    renderBook = book => {
-        let smallImgSrc;
+    deleteBook = () => {
+        this.props.deleteBook(this.props.book.id)
+    }
+
+    editBook = () => {
+        let book = this.props.book;
+        this.props.editBook(book);
+    }
+
+    getValidImgSrc = book => {
+        const generalBookUrl = 'https://image.flaticon.com/icons/png/128/166/166088.png';
         if (book.originalBook) {
-            smallImgSrc = book.originalBook.volumeInfo.imageLinks.smallThumbnail;
+            if (book.originalBook.volumeInfo) {
+                if (book.originalBook.volumeInfo.imageLinks) {
+                    if (book.originalBook.volumeInfo.imageLinks.smallThumbnail) {
+                        return book.originalBook.volumeInfo.imageLinks.smallThumbnail;
+                    }
+                }
+            }
         }
+        return generalBookUrl;
+    }
+
+    getFormatedTitle = book => {
+        if (book.title) {
+            return book.title.replace(/[^0-9a-zA-Zא-ת ]+/g, '').toLowerCase();
+        }
+    }
+
+    renderBook = book => {
+        let smallImgSrc = this.getValidImgSrc(book);
         let authors = book.authors
         let date = new Date(book.date)
-        let title;
-        if (book.title) {
-            title = book.title.replace(/[^0-9a-zA-Z ]+/g, '').toLowerCase();
-        }
+        let title = this.getFormatedTitle(book);
+
         let bookHtml = (
             <li className="book">
                 <div className="book-txt">
@@ -55,26 +76,6 @@ export class Book extends Component {
             </li>
         )
         this.setState({ bookHtml })
-    }
-
-    deleteBook = () => {
-        this.props.deleteBook(this.props.book.id)
-    }
-
-    editBook = editedBook => {
-        this.props.BookStore.setCurrBook(this.props.book);
-        this.props.ModalStore.toggleDisplay(
-            {
-                content:
-                <MyForm />,
-                confirm:
-                'Save changes',
-                onSubmit:
-                () => {
-                    this.props.BookStore.editBook(this.props.BookStore.bookGetter.id);
-                    this.renderBook(this.props.BookStore.bookGetter);
-                }
-            })
     }
 
     render() {

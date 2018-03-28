@@ -20,10 +20,10 @@ class ModalObservableStore {
     @computed get disabledGetter() {
         for (var key in this.disabled) {
             if (this.disabled[key]) {
-                return true
+                return true;
             }
-            console.log(key +': '+ this.disabled[key])
         }
+        return false;
     }
 
     @action _toggleDisplay() {

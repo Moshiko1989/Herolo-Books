@@ -8,7 +8,7 @@ li.book {
   min-width: 250px;
   max-width: 500px;
   margin: 10px;
-  border: 1px #E2DFB4 solid;
+  border: 1px #FFFFFF solid;
   display: flex;
   flex-direction: column;
   justify-content: space-between; }

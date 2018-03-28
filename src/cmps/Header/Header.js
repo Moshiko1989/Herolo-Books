@@ -1,6 +1,5 @@
 // Extentions
 import React from 'react';
-
 // Styles
 import './Header.css';
 
@@ -12,8 +11,10 @@ export const Header = props => {
             </div>
             <div className="my-search">
                 <form onSubmit={props.onSearch}>
-                    <input className="search-bar" placeholder="Enter a Book Name..."/>
-                    <i className="fa fa-search" aria-hidden="true"></i>
+                    <input className="search-bar" placeholder="Enter a Book Name..." />
+                    <button>
+                        <i className="fa fa-search" aria-hidden="true"></i>
+                    </button>
                 </form>
             </div>
         </header>

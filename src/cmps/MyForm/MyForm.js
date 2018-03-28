@@ -1,72 +1,60 @@
 // Extenions
 import React, { Component } from 'react'
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 // React Vlidation components
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
-// My Validation functions
-import { required, date, exists } from '../../validations';
-// Style
+// Styles
 import './MyForm.css';
 
-@inject('BookStore')
 @observer
 export class MyForm extends Component {
     state = {
-        bookDetails: this.props.BookStore.bookGetter || {}
+        formDetails: {...this.props.formDetails},
+        InputsProps: this.props.InputsProps
     }
 
     onInputchange = ev => {
         let field = ev.target.name;
         let fieldValue = ev.target.value;
-        let bookDetails = {
-            ...this.state.bookDetails,
+        let formDetails = {
+            ...this.state.formDetails,
             [field]: fieldValue
         }
-        this.setState({ bookDetails });
-        this.props.BookStore.setCurrBook(bookDetails)
+        this.setState({ formDetails });
+        this.setCurrFormDetails(formDetails)
+    }
+
+    setCurrFormDetails = formDetails => {
+        this.props.setCurrFormDetails(formDetails);
     }
 
     render() {
-        let bookDetails = this.state.bookDetails
+        let formDetails = this.state.formDetails;
+        let InputsProps = this.state.InputsProps
+        let Inputs = InputsProps.map((input, idx) => {
+            let txtToLower = input.txt.toLowerCase();
+            let txt = input.txt;
+            let validation = Array.from(input.validation);
+            return (
+                <div key={idx}>
+                    <h1>{txt}:</h1>
+                    <Input
+                        className="my-input"
+                        type="text"
+                        onChange={this.onInputchange}
+                        placeholder={txt}
+                        name={txtToLower}
+                        value={formDetails[txtToLower]}
+                        validations={validation}
+                    />
+                </div>
+            )
+        })
+
         return (
             <Form className="my-form">
-                <div>
-                    <h1>Title:</h1>
-                    <Input
-                        className="my-input"
-                        placeholder="Title"
-                        type="text"
-                        value={bookDetails.title}
-                        name="title"
-                        validations={[required, exists]}
-                        onChange={this.onInputchange}
-                    />
-                </div>
-                <div>
-                    <h1>Author(s):</h1>
-                    <Input
-                        className="my-input"
-                        placeholder="Author"
-                        type="text"
-                        value={bookDetails.authors}
-                        name="authors"
-                        validations={[required]}
-                        onChange={this.onInputchange}
-                    />
-                </div>
-                <div>
-                    <h1>Date:</h1>
-                    <Input
-                        className="my-input"
-                        placeholder="Date"
-                        type="text"
-                        value={bookDetails.date}
-                        name="date"
-                        validations={[required, date]}
-                        onChange={this.onInputchange}
-                    />
-                </div>
+                {Inputs}
             </Form>
         )
     }

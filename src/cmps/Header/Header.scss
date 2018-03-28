@@ -41,11 +41,19 @@
                     opacity: .8;
                 }
             }
-            i {
-                padding: 6px;                
-                font-size: 1.5em;
-                color: $light-color;    
-                border-left: none; 
+            button {
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                &:focus {
+                    outline: none; 
+                }     
+                i {
+                    padding: 6px;                
+                    font-size: 1.5em;
+                    color: $light-color;    
+                    border-left: none; 
+                }
             }
         }
     }

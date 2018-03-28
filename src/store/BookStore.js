@@ -2,6 +2,9 @@
 import { computed, observable, action, useStrict } from 'mobx';
 // Services
 import BookService from '../services/BookService';
+// My Validation functions
+import { required, date, exists } from '../validations';
+
 
 useStrict(true)
 
@@ -10,6 +13,20 @@ class BookObservableStore {
     @observable books = null;
     @observable fixedBooks = null;
     @observable currBook = null;
+    @observable formsInputsProps = [
+        {
+            txt: 'Title',
+            validation: [required, exists]
+        },
+        {
+            txt: 'Authors',
+            validation: [required]
+        },
+        {
+            txt: 'Date',
+            validation: [required, date]
+        },
+    ]
     @observable newId = 'x';
 
     // Observing functions
@@ -23,6 +40,10 @@ class BookObservableStore {
 
     @computed get bookGetter() {
         return this.currBook;
+    }
+
+    @computed get formsInputsPropsGetter() {
+        return this.formsInputsProps;
     }
 
     // Changing State syncronously
@@ -61,14 +82,19 @@ class BookObservableStore {
     // Accesses from components & pages
     loadBooks = query => {
         return BookService.getBooks(query)
-            .then(booksPrm => {
-                let books = booksPrm.data.items
+            .then(booksHead => {
+                let books = booksHead.data.items
+                
                 if (!books) return {};
                 this._setBooks(books)
+
                 let fixedBooks = books.map(book => {
-                    if (!book.volumeInfo.authors) return {};
+                    let authors = book.volumeInfo.authors ?
+                    book.volumeInfo.authors.toString() :
+                    'unknown';
+
                     return {
-                        authors: book.volumeInfo.authors.toString(),
+                        authors,
                         date: book.volumeInfo.publishedDate,
                         title: book.volumeInfo.title,
                         id: book.id,
@@ -89,12 +115,12 @@ class BookObservableStore {
         this.clearCurrBook();
     }
 
-    setCurrBook = book => {
-        this._setCurrBook(book);
-    }
-
     editBook = bookId => {
         this._editBook(bookId);
+    }
+
+    setCurrBook = book => {
+        this._setCurrBook(book);
     }
 
     clearCurrBook = () => {

@@ -23,7 +23,7 @@ class App extends Component {
     ev.preventDefault()
     let query = '';
     for (var child in ev.target.children) {
-      if (ev.target.children[child].className !== 'search-bar') continue; 
+      if (ev.target.children[child].className !== 'search-bar') continue;
       query = ev.target.children[child].value;
       this.props.BookStore.loadBooks(query);
     }
@@ -34,7 +34,10 @@ class App extends Component {
     return (
       <div className="App" ref="App">
         <Header logoInfo={logoInfo} onSearch={this.searchBooks} />
-        <Modal {...modalProps} />
+        <Modal
+          {...modalProps}
+          clearCurrItemFromState={this.props.BookStore.clearCurrBook}
+        />
         <BooksList />
       </div >
     )

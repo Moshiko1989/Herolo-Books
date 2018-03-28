@@ -1,16 +1,31 @@
+// Extentions
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-
+// Styles 
 import './Modal.css';
 
-@inject('BookStore', 'ModalStore')
+const ESC_KEY_CODE = 27;
+
+@inject('ModalStore')
 @observer
 export class Modal extends Component {
   closeModal = (ev) => {
-    if (!ev.keyCode || ev.keyCode === 27) {
+    if (!ev.keyCode || ev.keyCode === ESC_KEY_CODE) {
       this.props.ModalStore.toggleDisplay();
-      this.props.BookStore.clearCurrBook();
+      this.clearCurrItemFromState()
     }
+  }
+
+  clearCurrItemFromState = () => {
+    this.props.clearCurrItemFromState()
+  }
+
+  isDisableBtn = () => {
+    return (
+      this.props.isDelete ?
+        false :
+        this.props.ModalStore.disabledGetter
+    )
   }
 
   submitForm = ev => {
@@ -20,14 +35,15 @@ export class Modal extends Component {
 
   render() {
     let display = this.props.ModalStore.displayGetter;
-    
+
     if (display === 'block') {
       document.addEventListener('keyup', this.closeModal);
     } else if (display === 'none') {
       document.removeEventListener('keyup', this.closeModal);
-    }
+    } else console.log('somthing went wrong...')
 
-    let isDisabled = this.props.ModalStore.disabledGetter
+    let isDisabled = this.isDisableBtn()
+
     return (
       <div className="modal modal-component" ref="modal" style={{ display }}>
         <div className="modal-background" onClick={this.closeModal}></div>

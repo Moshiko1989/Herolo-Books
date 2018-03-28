@@ -6,13 +6,20 @@ import { Loader } from '../Loader/Loader';
 import { Book } from '../Book/Book';
 import { MyForm } from '../MyForm/MyForm';
 // Styles 
-import './BooksList.css'
+import './BooksList.css';
 
 @inject('BookStore', 'ModalStore')
 @observer
 export class BooksList extends Component {
+    state = {
+        myFormProps: {
+            setCurrFormDetails: this.props.BookStore.setCurrBook,
+            InputsProps: this.props.BookStore.formsInputsPropsGetter,
+        }
+    }
+
     componentDidMount() {
-        this.props.BookStore.loadBooks().then(() => this.render())
+        this.props.BookStore.loadBooks().then(() => this.render());
     }
 
     deleteBook = bookId => {
@@ -25,9 +32,9 @@ export class BooksList extends Component {
                 onSubmit:
                 () => {
                     this.props.BookStore.deleteBook(bookId);
-                    //this.renderList();
                     this.render();
-                }
+                },
+                isDelete: true
             })
     }
 
@@ -35,14 +42,36 @@ export class BooksList extends Component {
         this.props.ModalStore.toggleDisplay(
             {
                 content:
-                <MyForm />,
+                <MyForm
+                    {...this.state.myFormProps}
+                    formDetails={{}}
+                />,
                 confirm:
                 'Add new',
                 onSubmit:
                 () => {
                     this.props.BookStore.addBook(this.props.BookStore.bookGetter);
-                    // this.renderList();
                     this.render();
+                }
+            })
+    }
+
+    editBook = book => {
+        this.props.BookStore.setCurrBook(book);
+        this.props.ModalStore.toggleDisplay(
+            {
+                content:
+                <MyForm
+                    {...this.state.myFormProps}
+                    formDetails={this.props.BookStore.bookGetter}
+                />,
+                confirm:
+                'Save changes',
+                onSubmit:
+                () => {
+                    this.props.BookStore.editBook(this.props.BookStore.bookGetter.id);
+                    let id = book.id;
+                    this.refs[id].renderBook(this.props.BookStore.bookGetter);
                 }
             })
     }
@@ -50,7 +79,12 @@ export class BooksList extends Component {
     render() {
         if (this.props.BookStore.fixedBooksGetter) {
             let list = this.props.BookStore.fixedBooksGetter.map(book => {
-                return <Book book={book} key={book.id} deleteBook={this.deleteBook} addBook={this.addBook} />
+                return <Book
+                    book={book}
+                    key={book.id}
+                    ref={book.id}
+                    deleteBook={this.deleteBook}
+                    editBook={this.editBook} />
             })
             return (
                 <div className="book-list">
